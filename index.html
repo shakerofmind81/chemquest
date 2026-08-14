@@ -20,9 +20,10 @@
     --muted:#667085;
     --primary:#2563eb;
     --primary-dark:#1d4ed8;
-    --border:#e4e7ec;
+    --border:#e2e8f0;
     --success:#16a34a;
     --danger:#dc2626;
+    --warning:#f59e0b;
     --shadow:0 8px 25px rgba(0,0,0,.08);
 }
 
@@ -47,7 +48,7 @@ body{
 header{
     background:linear-gradient(135deg,#1d4ed8,#7c3aed);
     color:white;
-    padding:22px 16px;
+    padding:18px 15px;
     position:sticky;
     top:0;
     z-index:20;
@@ -55,16 +56,16 @@ header{
 }
 
 .header-inner{
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
     display:flex;
-    align-items:center;
     justify-content:space-between;
+    align-items:center;
     gap:15px;
 }
 
 .logo{
-    font-size:27px;
+    font-size:28px;
     font-weight:800;
 }
 
@@ -74,30 +75,32 @@ header{
     margin-top:4px;
 }
 
-button{
-    border:0;
-    cursor:pointer;
-    font-weight:700;
+.creator-small{
+    font-size:11px;
+    opacity:.8;
+    margin-top:3px;
 }
 
 .theme-btn{
     background:rgba(255,255,255,.18);
     color:white;
-    padding:10px 13px;
+    border:1px solid rgba(255,255,255,.25);
+    padding:9px 12px;
     border-radius:10px;
     font-size:18px;
+    cursor:pointer;
 }
 
 nav{
     background:var(--card);
     border-bottom:1px solid var(--border);
     position:sticky;
-    top:79px;
+    top:77px;
     z-index:15;
 }
 
 .nav-inner{
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
     display:flex;
     overflow-x:auto;
@@ -106,33 +109,44 @@ nav{
 .nav-btn{
     background:transparent;
     color:var(--text);
-    padding:15px 18px;
+    padding:14px 17px;
     white-space:nowrap;
+    border:0;
+    cursor:pointer;
+    font-weight:700;
 }
 
 .nav-btn:hover{
-    background:var(--bg);
     color:var(--primary);
+    background:var(--bg);
 }
 
 main{
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
     padding:25px 15px 60px;
+}
+
+section{
+    animation:fade .2s ease;
+}
+
+@keyframes fade{
+    from{opacity:0;transform:translateY(5px);}
+    to{opacity:1;transform:translateY(0);}
 }
 
 .hero{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:20px;
-    padding:35px 25px;
+    border-radius:22px;
+    padding:45px 25px;
     text-align:center;
     box-shadow:var(--shadow);
-    margin-bottom:25px;
 }
 
 .hero h1{
-    font-size:36px;
+    font-size:40px;
     margin-bottom:12px;
 }
 
@@ -142,49 +156,81 @@ main{
 
 .hero p{
     color:var(--muted);
-    line-height:1.6;
-    max-width:700px;
+    line-height:1.7;
+    max-width:720px;
     margin:auto;
+    font-size:16px;
 }
 
-.hero-buttons{
+.buttons{
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
-    gap:12px;
-    margin-top:22px;
+    gap:10px;
+    margin-top:24px;
 }
 
-.primary-btn,
-.secondary-btn{
+.primary,
+.secondary{
     padding:13px 20px;
-    border-radius:11px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:700;
     font-size:15px;
 }
 
-.primary-btn{
+.primary{
     background:var(--primary);
     color:white;
+    border:0;
 }
 
-.primary-btn:hover{
+.primary:hover{
     background:var(--primary-dark);
 }
 
-.secondary-btn{
-    background:var(--bg);
+.secondary{
+    background:var(--card);
     color:var(--text);
     border:1px solid var(--border);
 }
 
 .section-title{
-    font-size:25px;
-    margin:30px 0 15px;
+    margin:32px 0 17px;
+    font-size:27px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:25px;
+}
+
+.stat{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    box-shadow:var(--shadow);
+}
+
+.stat-number{
+    font-size:28px;
+    font-weight:800;
+    color:var(--primary);
+}
+
+.stat-label{
+    color:var(--muted);
+    margin-top:6px;
+    font-size:14px;
 }
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
     gap:16px;
 }
 
@@ -196,6 +242,11 @@ main{
     box-shadow:var(--shadow);
 }
 
+.card-icon{
+    font-size:30px;
+    margin-bottom:9px;
+}
+
 .card h3{
     margin-bottom:8px;
 }
@@ -203,19 +254,26 @@ main{
 .card p{
     color:var(--muted);
     font-size:14px;
-    line-height:1.5;
+    line-height:1.55;
 }
 
 .card button{
-    margin-top:15px;
     width:100%;
+    margin-top:15px;
     padding:11px;
+    border:0;
     border-radius:9px;
     background:var(--primary);
     color:white;
+    cursor:pointer;
+    font-weight:700;
 }
 
-.search-box{
+.card button:hover{
+    background:var(--primary-dark);
+}
+
+.search{
     width:100%;
     padding:14px;
     border:1px solid var(--border);
@@ -226,20 +284,49 @@ main{
     margin-bottom:18px;
 }
 
-.test-box{
+.filters{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+select{
+    padding:12px;
+    border:1px solid var(--border);
+    border-radius:9px;
+    background:var(--card);
+    color:var(--text);
+}
+
+.notice{
     background:var(--card);
     border:1px solid var(--border);
-    border-radius:18px;
-    padding:24px;
+    border-radius:16px;
+    padding:22px;
+    color:var(--muted);
+    line-height:1.65;
     box-shadow:var(--shadow);
 }
 
-.test-top{
+.notice strong{
+    color:var(--text);
+}
+
+.quiz-box{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:25px;
+    box-shadow:var(--shadow);
+}
+
+.quiz-top{
     display:flex;
     justify-content:space-between;
     gap:10px;
     flex-wrap:wrap;
-    margin-bottom:20px;
+    margin-bottom:15px;
 }
 
 .badge{
@@ -250,22 +337,40 @@ main{
     font-size:14px;
 }
 
+.progress{
+    width:100%;
+    height:8px;
+    background:var(--bg);
+    border-radius:20px;
+    overflow:hidden;
+    margin:15px 0 25px;
+}
+
+.progress-bar{
+    height:100%;
+    width:0;
+    background:var(--primary);
+    transition:.3s;
+}
+
 .question{
     font-size:20px;
-    line-height:1.5;
-    margin-bottom:18px;
+    font-weight:700;
+    line-height:1.55;
+    margin-bottom:20px;
 }
 
 .option{
     display:block;
     width:100%;
-    text-align:left;
     padding:14px;
-    margin:10px 0;
+    margin:9px 0;
+    text-align:left;
     border:1px solid var(--border);
     border-radius:10px;
     background:var(--bg);
     color:var(--text);
+    cursor:pointer;
     font-size:15px;
 }
 
@@ -275,14 +380,14 @@ main{
 
 .option.correct{
     background:#dcfce7;
-    color:#166534;
     border-color:#22c55e;
+    color:#166534;
 }
 
 .option.wrong{
     background:#fee2e2;
-    color:#991b1b;
     border-color:#ef4444;
+    color:#991b1b;
 }
 
 body.dark .option.correct{
@@ -296,57 +401,77 @@ body.dark .option.wrong{
 }
 
 .explanation{
-    background:var(--bg);
+    margin-top:17px;
+    padding:15px;
     border-left:4px solid var(--primary);
-    padding:13px;
-    margin-top:15px;
     border-radius:6px;
-    color:var(--muted);
-    line-height:1.5;
-}
-
-.progress{
-    height:8px;
     background:var(--bg);
-    border-radius:20px;
-    overflow:hidden;
-    margin:15px 0 22px;
-}
-
-.progress-bar{
-    height:100%;
-    background:var(--primary);
-    width:0%;
-    transition:.3s;
+    color:var(--muted);
+    line-height:1.55;
 }
 
 .result{
     text-align:center;
-    padding:30px 15px;
+    padding:35px 15px;
 }
 
 .score{
-    font-size:48px;
+    font-size:52px;
     font-weight:800;
     color:var(--primary);
     margin:15px;
 }
 
-.notice{
-    background:var(--card);
+.result-stats{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin:20px 0;
+}
+
+.result-item{
+    padding:13px 18px;
     border:1px solid var(--border);
-    padding:20px;
-    border-radius:15px;
-    line-height:1.6;
-    color:var(--muted);
+    border-radius:10px;
+    background:var(--bg);
+}
+
+.pyq-card{
+    border-left:5px solid var(--primary);
+}
+
+.pyq-status{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    background:#fef3c7;
+    color:#92400e;
+    margin-bottom:10px;
+}
+
+body.dark .pyq-status{
+    background:#422006;
+    color:#fcd34d;
+}
+
+.about-list{
+    margin-top:15px;
+    padding-left:20px;
+}
+
+.about-list li{
+    margin:8px 0;
 }
 
 footer{
-    text-align:center;
-    padding:30px 15px;
     background:var(--card);
     border-top:1px solid var(--border);
     color:var(--muted);
+    text-align:center;
+    padding:35px 15px;
 }
 
 .creator{
@@ -358,21 +483,49 @@ footer{
     display:none !important;
 }
 
-@media(max-width:600px){
+@media(max-width:750px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
     .hero h1{
-        font-size:29px;
+        font-size:31px;
     }
 
     .logo{
-        font-size:22px;
+        font-size:23px;
+    }
+
+    nav{
+        top:70px;
+    }
+}
+
+@media(max-width:480px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat{
+        padding:15px 8px;
+    }
+
+    .hero{
+        padding:32px 17px;
+    }
+
+    .hero h1{
+        font-size:27px;
+    }
+
+    .quiz-box{
+        padding:18px;
     }
 
     .question{
         font-size:18px;
-    }
-
-    nav{
-        top:72px;
     }
 }
 </style>
@@ -381,91 +534,150 @@ footer{
 <body>
 
 <header>
-    <div class="header-inner">
-        <div>
-            <div class="logo">🧪 ChemQuest</div>
-            <div class="tagline">Free Chemistry Practice Platform</div>
-        </div>
 
-        <button class="theme-btn" onclick="toggleDarkMode()" id="themeButton">
-            🌙
-        </button>
-    </div>
+<div class="header-inner">
+
+<div>
+<div class="logo">🧪 ChemQuest</div>
+<div class="tagline">Free Chemistry MCQ & PYQ Practice</div>
+<div class="creator-small">Created by Prince Kumar</div>
+</div>
+
+<button class="theme-btn" onclick="toggleDark()" id="themeBtn">
+🌙
+</button>
+
+</div>
+
 </header>
 
+
 <nav>
-    <div class="nav-inner">
-        <button class="nav-btn" onclick="showPage('home')">🏠 Home</button>
-        <button class="nav-btn" onclick="showPage('practice')">🧪 Practice</button>
-        <button class="nav-btn" onclick="showPage('chapters')">📚 Chapters</button>
-        <button class="nav-btn" onclick="showPage('pyq')">🎯 PYQ</button>
-        <button class="nav-btn" onclick="showPage('about')">ℹ️ About</button>
-    </div>
+
+<div class="nav-inner">
+
+<button class="nav-btn" onclick="showPage('home')">
+🏠 Home
+</button>
+
+<button class="nav-btn" onclick="showPage('practice')">
+🧪 Practice
+</button>
+
+<button class="nav-btn" onclick="showPage('chapters')">
+📚 Chapters
+</button>
+
+<button class="nav-btn" onclick="showPage('pyq')">
+🎯 PYQ
+</button>
+
+<button class="nav-btn" onclick="showPage('about')">
+ℹ️ About
+</button>
+
+</div>
+
 </nav>
 
+
 <main>
+
 
 <!-- HOME -->
 
 <section id="home">
 
-    <div class="hero">
+<div class="hero">
 
-        <h1>Welcome to <span>ChemQuest</span> 🧪</h1>
+<h1>
+Master Chemistry with <span>ChemQuest</span>
+</h1>
 
-        <p>
-            A free Chemistry practice website for students.
-            Practice MCQs, revise important concepts and test your preparation
-            from your phone or computer.
-        </p>
+<p>
+Practice Chemistry MCQs, revise important concepts and
+prepare smarter — completely free for students.
+</p>
 
-        <div class="hero-buttons">
+<div class="buttons">
 
-            <button class="primary-btn" onclick="startTest()">
-                🚀 Start 20 MCQ Test
-            </button>
+<button class="primary" onclick="startTest()">
+🚀 Start 20 MCQ Test
+</button>
 
-            <button class="secondary-btn" onclick="showPage('chapters')">
-                📚 Explore Chapters
-            </button>
+<button class="secondary" onclick="showPage('chapters')">
+📚 Explore Chapters
+</button>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    <h2 class="section-title">Why use ChemQuest?</h2>
 
-    <div class="cards">
+<div class="stats">
 
-        <div class="card">
-            <h3>🧪 Practice MCQs</h3>
-            <p>
-                Solve Chemistry questions and improve your concepts.
-            </p>
-        </div>
+<div class="stat">
+<div class="stat-number">20+</div>
+<div class="stat-label">Practice MCQs</div>
+</div>
 
-        <div class="card">
-            <h3>📱 Mobile Friendly</h3>
-            <p>
-                Designed to work smoothly on phones, tablets and computers.
-            </p>
-        </div>
+<div class="stat">
+<div class="stat-number">12</div>
+<div class="stat-label">Class 12 Chapters</div>
+</div>
 
-        <div class="card">
-            <h3>🎯 Test Yourself</h3>
-            <p>
-                Take a 20-question test and see your score instantly.
-            </p>
-        </div>
+<div class="stat">
+<div class="stat-number">FREE</div>
+<div class="stat-label">For Students</div>
+</div>
 
-        <div class="card">
-            <h3>💯 Free</h3>
-            <p>
-                ChemQuest is intended to provide free educational practice.
-            </p>
-        </div>
+<div class="stat">
+<div class="stat-number">24/7</div>
+<div class="stat-label">Online Access</div>
+</div>
 
-    </div>
+</div>
+
+
+<h2 class="section-title">
+⭐ What ChemQuest offers
+</h2>
+
+<div class="cards">
+
+<div class="card">
+<div class="card-icon">🧪</div>
+<h3>MCQ Practice</h3>
+<p>
+Practice Chemistry questions with instant feedback and explanations.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">📚</div>
+<h3>Chapter Revision</h3>
+<p>
+Find Chemistry chapters quickly and practice topic-wise.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">🎯</div>
+<h3>PYQ Library</h3>
+<p>
+A dedicated place for previous-year questions, coming after the PYQ data is added.
+</p>
+</div>
+
+<div class="card">
+<div class="card-icon">📊</div>
+<h3>Instant Results</h3>
+<p>
+Get your score and percentage immediately after completing a test.
+</p>
+</div>
+
+</div>
 
 </section>
 
@@ -474,66 +686,211 @@ footer{
 
 <section id="practice" class="hidden">
 
-    <h2 class="section-title">🧪 Chemistry Practice</h2>
+<h2 class="section-title">
+🧪 Practice MCQs
+</h2>
 
-    <input
-        class="search-box"
-        id="searchInput"
-        placeholder="🔍 Search chapter..."
-        oninput="filterChapters()"
-    >
+<input
+class="search"
+id="chapterSearch"
+placeholder="🔍 Search chapter..."
+oninput="searchChapters()"
+>
 
-    <div class="cards" id="chapterCards">
+<div class="cards" id="chapterCards">
 
-        <div class="card chapter-card" data-name="solutions">
-            <h3>Solutions</h3>
-            <p>Concentration, Raoult's law and colligative properties.</p>
-            <button onclick="startChapter('Solutions')">
-                Practice
-            </button>
-        </div>
+<div class="card chapter-card" data-search="solutions">
 
-        <div class="card chapter-card" data-name="electrochemistry">
-            <h3>Electrochemistry</h3>
-            <p>Cells, electrode potential and electrolysis.</p>
-            <button onclick="startChapter('Electrochemistry')">
-                Practice
-            </button>
-        </div>
+<div class="card-icon">🧪</div>
+<h3>Solutions</h3>
 
-        <div class="card chapter-card" data-name="chemical kinetics">
-            <h3>Chemical Kinetics</h3>
-            <p>Rate law, order, half-life and activation energy.</p>
-            <button onclick="startChapter('Chemical Kinetics')">
-                Practice
-            </button>
-        </div>
+<p>
+Concentration, solubility and colligative properties.
+</p>
 
-        <div class="card chapter-card" data-name="d and f block">
-            <h3>d- and f-Block Elements</h3>
-            <p>Properties and important trends of transition elements.</p>
-            <button onclick="startChapter('d- and f-Block')">
-                Practice
-            </button>
-        </div>
+<button onclick="startChapter('Solutions')">
+Practice
+</button>
 
-        <div class="card chapter-card" data-name="coordination compounds">
-            <h3>Coordination Compounds</h3>
-            <p>Ligands, coordination number and nomenclature.</p>
-            <button onclick="startChapter('Coordination Compounds')">
-                Practice
-            </button>
-        </div>
+</div>
 
-        <div class="card chapter-card" data-name="amines">
-            <h3>Amines</h3>
-            <p>Classification, basicity and important reactions.</p>
-            <button onclick="startChapter('Amines')">
-                Practice
-            </button>
-        </div>
 
-    </div>
+<div class="card chapter-card" data-search="electrochemistry">
+
+<div class="card-icon">⚡</div>
+<h3>Electrochemistry</h3>
+
+<p>
+Electrochemical cells, conductivity and electrode potential.
+</p>
+
+<button onclick="startChapter('Electrochemistry')">
+Practice
+</button>
+
+</div>
+
+
+<div class="card chapter-card" data-search="chemical kinetics">
+
+<div class="card-icon">⏱️</div>
+<h3>Chemical Kinetics</h3>
+
+<p>
+Rate law, order, half-life and activation energy.
+</p>
+
+<button onclick="startChapter('Chemical Kinetics')">
+Practice
+</button>
+
+</div>
+
+
+<div class="card chapter-card" data-search="d f block">
+
+<div class="card-icon">🔬</div>
+<h3>d- and f-Block Elements</h3>
+
+<p>
+Important properties and trends of transition elements.
+</p>
+
+<button onclick="startChapter('d and f Block')">
+Practice
+</button>
+
+</div>
+
+
+<div class="card chapter-card" data-search="coordination compounds">
+
+<div class="card-icon">🔗</div>
+<h3>Coordination Compounds</h3>
+
+<p>
+Ligands, coordination number and nomenclature.
+</p>
+
+<button onclick="startChapter('Coordination Compounds')">
+Practice
+</button>
+
+</div>
+
+
+<div class="card chapter-card" data-search="haloalkanes haloarenes">
+
+<div class="card-icon">⚗️</div>
+<h3>Haloalkanes & Haloarenes</h3>
+
+<p>
+Important organic reactions and concepts.
+</p>
+
+<button onclick="startChapter('Haloalkanes')">
+Practice
+</button>
+
+</div>
+
+
+<div class="card chapter-card" data-search="alcohol phenol ether">
+
+<div class="card-icon">🧴</div>
+<h3>Alcohols, Phenols & Ethers</h3>
+
+<p>
+Preparation, properties and reactions.
+</p>
+
+<button onclick="startChapter('Alcohols')">
+Practice
+</button>
+
+</div>
+
+
+<div class="card chapter-card" data-search="amines">
+
+<div class="card-icon">🧬</div>
+<h3>Amines</h3>
+
+<p>
+Classification, basicity and important reactions.
+</p>
+
+<button onclick="startChapter('Amines')">
+Practice
+</button>
+
+</div>
+
+
+<div class="card chapter-card" data-search="biomolecules">
+
+<div class="card-icon">🍬</div>
+<h3>Biomolecules</h3>
+
+<p>
+Carbohydrates, proteins, enzymes and vitamins.
+</p>
+
+<button onclick="startChapter('Biomolecules')">
+Practice
+</button>
+
+</div>
+
+
+<div class="card chapter-card" data-search="polymers">
+
+<div class="card-icon">🧵</div>
+<h3>Polymers</h3>
+
+<p>
+Classification and important polymers.
+</p>
+
+<button onclick="startChapter('Polymers')">
+Practice
+</button>
+
+</div>
+
+
+<div class="card chapter-card" data-search="chemistry everyday life">
+
+<div class="card-icon">💊</div>
+<h3>Chemistry in Everyday Life</h3>
+
+<p>
+Drugs, medicines and useful chemicals.
+</p>
+
+<button onclick="startChapter('Everyday Life')">
+Practice
+</button>
+
+</div>
+
+
+<div class="card chapter-card" data-search="general chemistry mixed">
+
+<div class="card-icon">🧠</div>
+<h3>Mixed Chemistry</h3>
+
+<p>
+Mixed questions from different Chemistry topics.
+</p>
+
+<button onclick="startTest()">
+Practice
+</button>
+
+</div>
+
+</div>
 
 </section>
 
@@ -542,47 +899,85 @@ footer{
 
 <section id="chapters" class="hidden">
 
-    <h2 class="section-title">📚 Chemistry Chapters</h2>
+<h2 class="section-title">
+📚 Class 12 Chemistry Chapters
+</h2>
 
-    <div class="cards">
+<div class="cards">
 
-        <div class="card">
-            <h3>01 — Solutions</h3>
-            <p>Practice questions based on concentration and colligative properties.</p>
-            <button onclick="startChapter('Solutions')">Start</button>
-        </div>
+<div class="card">
+<h3>01. Solutions</h3>
+<p>Concentration and colligative properties.</p>
+<button onclick="startChapter('Solutions')">Practice</button>
+</div>
 
-        <div class="card">
-            <h3>02 — Electrochemistry</h3>
-            <p>Practice electrochemical cell concepts.</p>
-            <button onclick="startChapter('Electrochemistry')">Start</button>
-        </div>
+<div class="card">
+<h3>02. Electrochemistry</h3>
+<p>Cells, conductivity and electrode potential.</p>
+<button onclick="startChapter('Electrochemistry')">Practice</button>
+</div>
 
-        <div class="card">
-            <h3>03 — Chemical Kinetics</h3>
-            <p>Practice rate and reaction-order questions.</p>
-            <button onclick="startChapter('Chemical Kinetics')">Start</button>
-        </div>
+<div class="card">
+<h3>03. Chemical Kinetics</h3>
+<p>Rate law, order and half-life.</p>
+<button onclick="startChapter('Chemical Kinetics')">Practice</button>
+</div>
 
-        <div class="card">
-            <h3>04 — d- and f-Block</h3>
-            <p>Revise transition and inner-transition elements.</p>
-            <button onclick="startChapter('d- and f-Block')">Start</button>
-        </div>
+<div class="card">
+<h3>04. d- and f-Block</h3>
+<p>Transition and inner-transition elements.</p>
+<button onclick="startChapter('d and f Block')">Practice</button>
+</div>
 
-        <div class="card">
-            <h3>05 — Coordination Compounds</h3>
-            <p>Practice basic coordination chemistry.</p>
-            <button onclick="startChapter('Coordination Compounds')">Start</button>
-        </div>
+<div class="card">
+<h3>05. Coordination Compounds</h3>
+<p>Ligands, bonding and nomenclature.</p>
+<button onclick="startChapter('Coordination Compounds')">Practice</button>
+</div>
 
-        <div class="card">
-            <h3>06 — Amines</h3>
-            <p>Practice important concepts from amines.</p>
-            <button onclick="startChapter('Amines')">Start</button>
-        </div>
+<div class="card">
+<h3>06. Haloalkanes & Haloarenes</h3>
+<p>Important organic reactions.</p>
+<button onclick="startChapter('Haloalkanes')">Practice</button>
+</div>
 
-    </div>
+<div class="card">
+<h3>07. Alcohols, Phenols & Ethers</h3>
+<p>Preparation and chemical reactions.</p>
+<button onclick="startChapter('Alcohols')">Practice</button>
+</div>
+
+<div class="card">
+<h3>08. Amines</h3>
+<p>Basicity and important reactions.</p>
+<button onclick="startChapter('Amines')">Practice</button>
+</div>
+
+<div class="card">
+<h3>09. Biomolecules</h3>
+<p>Carbohydrates, proteins and vitamins.</p>
+<button onclick="startChapter('Biomolecules')">Practice</button>
+</div>
+
+<div class="card">
+<h3>10. Polymers</h3>
+<p>Classification and applications.</p>
+<button onclick="startChapter('Polymers')">Practice</button>
+</div>
+
+<div class="card">
+<h3>11. Chemistry in Everyday Life</h3>
+<p>Drugs and useful chemicals.</p>
+<button onclick="startChapter('Everyday Life')">Practice</button>
+</div>
+
+<div class="card">
+<h3>12. Mixed Revision</h3>
+<p>Questions from different chapters.</p>
+<button onclick="startTest()">Start Test</button>
+</div>
+
+</div>
 
 </section>
 
@@ -591,76 +986,127 @@ footer{
 
 <section id="pyq" class="hidden">
 
-    <h2 class="section-title">🎯 Previous Year Questions</h2>
+<h2 class="section-title">
+🎯 Previous Year Questions
+</h2>
 
-    <div class="notice">
+<div class="filters">
 
-        <h3>PYQ Library — Coming Soon</h3>
+<select id="pyqYear" onchange="filterPYQ()">
 
-        <br>
+<option value="all">All Years</option>
+<option value="2026">2026</option>
+<option value="2025">2025</option>
+<option value="2024">2024</option>
+<option value="2023">2023</option>
+<option value="2022">2022</option>
+<option value="2021">2021</option>
 
-        <p>
-            This section will contain a searchable collection of previous-year
-            Chemistry questions that are suitable for publication.
-        </p>
+</select>
 
-        <br>
 
-        <p>
-            We will organize them by <strong>year, chapter and exam</strong>
-            so that students can find questions quickly.
-        </p>
+<select id="pyqChapter" onchange="filterPYQ()">
 
-        <br>
+<option value="all">All Chapters</option>
+<option value="Solutions">Solutions</option>
+<option value="Electrochemistry">Electrochemistry</option>
+<option value="Chemical Kinetics">Chemical Kinetics</option>
+<option value="Coordination Compounds">
+Coordination Compounds
+</option>
+<option value="Organic Chemistry">
+Organic Chemistry
+</option>
 
-        <p>
-            For now, use the Practice section for original Chemistry MCQs.
-        </p>
+</select>
 
-    </div>
+</div>
+
+
+<input
+class="search"
+id="pyqSearch"
+placeholder="🔍 Search PYQ..."
+oninput="filterPYQ()"
+>
+
+
+<div id="pyqList">
+
+<div class="card pyq-card">
+
+<span class="pyq-status">
+COMING SOON
+</span>
+
+<h3>📄 Chemistry PYQ Library</h3>
+
+<p>
+Your Chemistry PYQ PDFs will be organized here by
+year and chapter once they are available.
+</p>
+
+<br>
+
+<p>
+The final section will allow students to quickly find
+questions instead of searching through many PDFs.
+</p>
+
+</div>
+
+</div>
 
 </section>
 
 
-<!-- TEST -->
+<!-- QUIZ -->
 
-<section id="test" class="hidden">
+<section id="quiz" class="hidden">
 
-    <div class="test-box">
+<h2 class="section-title">
+🧪 MCQ Test
+</h2>
 
-        <div class="test-top">
+<div class="quiz-box">
 
-            <span class="badge" id="questionNumber">
-                Question 1 / 20
-            </span>
+<div class="quiz-top">
 
-            <span class="badge" id="timer">
-                ⏱️ 10:00
-            </span>
+<span class="badge" id="questionNo">
+Question 1 / 20
+</span>
 
-        </div>
+<span class="badge" id="timer">
+⏱️ 10:00
+</span>
 
-        <div class="progress">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
+</div>
 
-        <div class="question" id="questionText"></div>
 
-        <div id="options"></div>
+<div class="progress">
 
-        <div id="explanation" class="explanation hidden"></div>
+<div class="progress-bar" id="progressBar"></div>
 
-        <br>
+</div>
 
-        <button
-            class="primary-btn"
-            id="nextButton"
-            onclick="nextQuestion()"
-        >
-            Next Question →
-        </button>
 
-    </div>
+<div class="question" id="questionText"></div>
+
+<div id="options"></div>
+
+<div id="explanation" class="explanation hidden"></div>
+
+<br>
+
+<button
+class="primary"
+id="nextBtn"
+onclick="nextQuestion()"
+>
+Next Question →
+</button>
+
+</div>
 
 </section>
 
@@ -669,27 +1115,51 @@ footer{
 
 <section id="result" class="hidden">
 
-    <div class="test-box result">
+<div class="quiz-box result">
 
-        <h2>🎉 Test Completed!</h2>
+<h2>🎉 Test Completed!</h2>
 
-        <div class="score" id="finalScore">
-            0 / 20
-        </div>
+<div class="score" id="finalScore">
+0 / 20
+</div>
 
-        <p id="finalMessage"></p>
+<div class="result-stats">
 
-        <br>
+<div class="result-item">
+<strong id="correctCount">0</strong>
+<br>
+Correct
+</div>
 
-        <button class="primary-btn" onclick="startTest()">
-            🔄 Try Again
-        </button>
+<div class="result-item">
+<strong id="wrongCount">0</strong>
+<br>
+Wrong
+</div>
 
-        <button class="secondary-btn" onclick="showPage('home')">
-            🏠 Home
-        </button>
+<div class="result-item">
+<strong id="percentage">0%</strong>
+<br>
+Percentage
+</div>
 
-    </div>
+</div>
+
+<p id="resultMessage"></p>
+
+<div class="buttons">
+
+<button class="primary" onclick="startTest()">
+🔄 Try Again
+</button>
+
+<button class="secondary" onclick="showPage('home')">
+🏠 Home
+</button>
+
+</div>
+
+</div>
 
 </section>
 
@@ -698,64 +1168,78 @@ footer{
 
 <section id="about" class="hidden">
 
-    <h2 class="section-title">ℹ️ About ChemQuest</h2>
+<h2 class="section-title">
+ℹ️ About ChemQuest
+</h2>
 
-    <div class="notice">
+<div class="notice">
 
-        <h3>About this website</h3>
+<h3>🧪 About ChemQuest</h3>
 
-        <br>
+<br>
 
-        <p>
-            ChemQuest is a student-focused Chemistry practice platform
-            created to make revision easier and more accessible.
-        </p>
+<p>
+ChemQuest is a free Chemistry practice platform designed
+to help students revise concepts and practice MCQs.
+</p>
 
-        <br>
+<ul class="about-list">
 
-        <p>
-            The goal is simple: provide useful Chemistry practice
-            without putting a paywall in front of students.
-        </p>
+<li>Free Chemistry MCQ practice</li>
 
-        <br>
+<li>Chapter-wise practice</li>
 
-        <p>
-            <strong>Created by:</strong>
-            <span class="creator">Prince Kumar</span>
-        </p>
+<li>Timed test mode</li>
 
-        <br>
+<li>Instant results</li>
 
-        <p>
-            Version: <strong>2.0</strong>
-        </p>
+<li>Previous-year question library</li>
 
-    </div>
+</ul>
+
+<br>
+
+<p>
+<strong>Created by:</strong>
+<span class="creator">Prince Kumar</span>
+</p>
+
+<br>
+
+<p>
+<strong>Version:</strong> 3.0
+</p>
+
+</div>
 
 </section>
+
 
 </main>
 
 
 <footer>
 
-    <p>
-        🧪 <strong>ChemQuest</strong> — Free Chemistry Practice
-    </p>
+<p>
+🧪 <strong>ChemQuest</strong>
+</p>
 
-    <br>
+<p>
+Free Chemistry MCQ & PYQ Practice
+</p>
 
-    <p>
-        Created by
-        <span class="creator">Prince Kumar</span>
-    </p>
+<br>
 
-    <br>
+<p>
+Created by
+<span class="creator">Prince Kumar</span>
+</p>
 
-    <p>
-        © 2026 ChemQuest
-    </p>
+<br>
+
+<p>
+© 2026 ChemQuest
+</p>
 
 </footer>
 
@@ -765,130 +1249,694 @@ footer{
 const questions = [
 
 {
-    q:"Which concentration unit is independent of temperature?",
-    options:["Molarity","Molality","Normality","Volume percentage"],
-    answer:1,
-    explanation:"Molality depends on mass of solvent, which does not change with temperature."
+chapter:"Solutions",
+q:"Which concentration unit is independent of temperature?",
+options:[
+"Molarity",
+"Molality",
+"Normality",
+"Volume percentage"
+],
+answer:1,
+explanation:
+"Molality is based on the mass of solvent, which does not change with temperature."
 },
 
 {
-    q:"The SI unit of conductivity is:",
-    options:["S m⁻¹","S cm⁻¹","ohm m","mol L⁻¹"],
-    answer:0,
-    explanation:"The SI unit of conductivity is siemens per metre (S m⁻¹)."
+chapter:"Solutions",
+q:"Which of the following is a colligative property?",
+options:[
+"Viscosity",
+"Osmotic pressure",
+"Surface tension",
+"Refractive index"
+],
+answer:1,
+explanation:
+"Osmotic pressure is a colligative property because it depends on the number of solute particles."
 },
 
 {
-    q:"For a first-order reaction, the unit of rate constant is:",
-    options:["mol L⁻¹ s⁻¹","s⁻¹","L mol⁻¹ s⁻¹","mol² L⁻² s⁻¹"],
-    answer:1,
-    explanation:"For a first-order reaction, k has the unit s⁻¹."
+chapter:"Electrochemistry",
+q:"The SI unit of conductivity is:",
+options:[
+"S m⁻¹",
+"S cm⁻¹",
+"ohm",
+"volt"
+],
+answer:0,
+explanation:
+"The SI unit of conductivity is siemens per metre (S m⁻¹)."
 },
 
 {
-    q:"Which law relates cell potential to reaction quotient?",
-    options:["Raoult's law","Henry's law","Nernst equation","Faraday's law"],
-    answer:2,
-    explanation:"The Nernst equation relates electrode or cell potential to concentration/activity."
+chapter:"Electrochemistry",
+q:"Oxidation takes place at the:",
+options:[
+"Cathode",
+"Anode",
+"Salt bridge",
+"Electrolyte only"
+],
+answer:1,
+explanation:
+"Oxidation always occurs at the anode."
 },
 
 {
-    q:"Which of the following is a colligative property?",
-    options:["Viscosity","Surface tension","Osmotic pressure","Refractive index"],
-    answer:2,
-    explanation:"Osmotic pressure depends on the number of solute particles."
+chapter:"Chemical Kinetics",
+q:"The unit of rate constant for a first-order reaction is:",
+options:[
+"mol L⁻¹ s⁻¹",
+"s⁻¹",
+"L mol⁻¹ s⁻¹",
+"mol² L⁻² s⁻¹"
+],
+answer:1,
+explanation:
+"For a first-order reaction, the rate constant has the unit s⁻¹."
 },
 
 {
-    q:"A ligand that can coordinate through two donor atoms is called:",
-    options:["Monodentate","Bidentate","Ambidentate only","Unidentate"],
-    answer:1,
-    explanation:"A bidentate ligand has two donor atoms capable of coordinating with a metal centre."
+chapter:"Chemical Kinetics",
+q:"The half-life of a first-order reaction is:",
+options:[
+"Dependent on initial concentration",
+"Independent of initial concentration",
+"Always zero",
+"Always one second"
+],
+answer:1,
+explanation:
+"For a first-order reaction, half-life is independent of the initial concentration."
 },
 
 {
-    q:"The oxidation state of Fe in [Fe(CN)6]³⁻ is:",
-    options:["+2","+3","+4","0"],
-    answer:1,
-    explanation:"Let Fe be x: x + 6(-1) = -3, so x = +3."
+chapter:"Coordination Compounds",
+q:"The coordination number of the metal in [Co(NH₃)₆]³⁺ is:",
+options:[
+"2",
+"4",
+"6",
+"8"
+],
+answer:2,
+explanation:
+"Six NH₃ ligands are directly attached to the cobalt centre."
 },
 
 {
-    q:"Which factor generally increases the rate of a chemical reaction?",
-    options:["Lowering temperature","Increasing suitable temperature","Removing all reactants","Always decreasing concentration"],
-    answer:1,
-    explanation:"Increasing temperature generally increases the number of effective collisions."
+chapter:"Coordination Compounds",
+q:"A ligand donating two donor atoms is called:",
+options:[
+"Monodentate",
+"Bidentate",
+"Tridentate",
+"Hexadentate"
+],
+answer:1,
+explanation:
+"A bidentate ligand has two donor atoms capable of coordinating to the metal."
 },
 
 {
-    q:"The half-life of a first-order reaction is:",
-    options:["Dependent on initial concentration","Independent of initial concentration","Always zero","Always equal to k"],
-    answer:1,
-    explanation:"For a first-order reaction, t₁/₂ = 0.693/k and is independent of initial concentration."
+chapter:"Amines",
+q:"Which compound is a primary amine?",
+options:[
+"CH₃NH₂",
+"CH₃OH",
+"CH₃COOH",
+"CH₃CHO"
+],
+answer:0,
+explanation:
+"CH₃NH₂ is methylamine and is a primary amine."
 },
 
 {
-    q:"Which element belongs to the d-block?",
-    options:["Na","Ca","Fe","Cl"],
-    answer:2,
-    explanation:"Iron is a transition element of the d-block."
+chapter:"Biomolecules",
+q:"Which of the following is a monosaccharide?",
+options:[
+"Sucrose",
+"Glucose",
+"Starch",
+"Cellulose"
+],
+answer:1,
+explanation:
+"Glucose is a monosaccharide."
 },
 
 {
-    q:"A solution containing more solute particles than a dilute solution generally has:",
-    options:["Higher concentration","Zero concentration","No solvent","No particles"],
-    answer:0,
-    explanation:"Concentration represents the amount of solute relative to the solution or solvent."
+chapter:"Polymers",
+q:"Which of the following is a natural polymer?",
+options:[
+"PVC",
+"Nylon-6",
+"Cellulose",
+"Teflon"
+],
+answer:2,
+explanation:
+"Cellulose is a naturally occurring polymer."
 },
 
 {
-    q:"Which electrode is the site of oxidation?",
-    options:["Anode","Cathode","Salt bridge","Voltmeter"],
-    answer:0,
-    explanation:"Oxidation always occurs at the anode."
+chapter:"Electrochemistry",
+q:"The standard electrode potential of the standard hydrogen electrode is:",
+options:[
+"0 V",
+"1 V",
+"-1 V",
+"0.5 V"
+],
+answer:0,
+explanation:
+"The standard hydrogen electrode is assigned a potential of 0 V."
 },
 
 {
-    q:"Which of these is an amine?",
-    options:["CH₃NH₂","CH₃OH","CH₃COOH","CH₃CHO"],
-    answer:0,
-    explanation:"CH₃NH₂ is methylamine, a primary amine."
+chapter:"Chemical Kinetics",
+q:"A catalyst generally works by:",
+options:[
+"Increasing activation energy",
+"Providing an alternative pathway",
+"Changing atomic number",
+"Changing the equilibrium constant permanently"
+],
+answer:1,
+explanation:
+"A catalyst provides an alternative reaction pathway with lower activation energy."
 },
 
 {
-    q:"The coordination number of the metal in [Co(NH₃)₆]³⁺ is:",
-    options:["2","4","6","8"],
-    answer:2,
-    explanation:"Six NH₃ ligands are directly attached to cobalt."
+chapter:"Solutions",
+q:"Molality is expressed as:",
+options:[
+"Moles of solute per litre of solution",
+"Moles of solute per kg of solvent",
+"Mass of solute per litre",
+"Moles of solvent per kg"
+],
+answer:1,
+explanation:
+"Molality is moles of solute divided by kilograms of solvent."
 },
 
 {
-    q:"Which quantity is used in molality?",
-    options:["Volume of solution","Mass of solvent","Mass of solution only","Volume of solute"],
-    answer:1,
-    explanation:"Molality is moles of solute per kilogram of solvent."
+chapter:"Coordination Compounds",
+q:"The species directly attached to the central metal ion are called:",
+options:[
+"Solvents",
+"Ligands",
+"Catalysts",
+"Anions only"
+],
+answer:1,
+explanation:
+"Ligands are species that donate electron pairs to the central metal ion."
 },
 
 {
-    q:"A catalyst changes the:",
-    options:["Equilibrium constant permanently","Activation energy pathway","Atomic number","Molecular formula of every reactant"],
-    answer:1,
-    explanation:"A catalyst provides an alternative pathway with lower activation energy."
+chapter:"Amines",
+q:"The functional group characteristic of primary amines is:",
+options:[
+"–OH",
+"–COOH",
+"–NH₂",
+"–CHO"
+],
+answer:2,
+explanation:
+"Primary amines contain the –NH₂ group."
 },
 
 {
-    q:"Which property depends on the number of solute particles?",
-    options:["Colligative property","Atomic number","Density of pure solvent only","Colour only"],
-    answer:0,
-    explanation:"Colligative properties depend on the number of dissolved particles."
+chapter:"Solutions",
+q:"Which property depends on the number of solute particles?",
+options:[
+"Colligative property",
+"Atomic number",
+"Colour only",
+"Magnetic moment only"
+],
+answer:0,
+explanation:
+"Colligative properties depend on the number of dissolved particles."
 },
 
 {
-    q:"The standard electrode potential of the standard hydrogen electrode is defined as:",
-    options:["1 V","0 V","-1 V","2 V"],
-    answer:1,
-    explanation:"The standard hydrogen electrode is assigned a standard reduction potential of 0.00 V."
+chapter:"Electrochemistry",
+q:"The device used to maintain electrical neutrality in a galvanic cell is:",
+options:[
+"Salt bridge",
+"Thermometer",
+"Condenser",
+"Calorimeter"
+],
+answer:0,
+explanation:
+"The salt bridge helps maintain electrical neutrality and completes the internal circuit."
 },
 
 {
-    q:"Which is
+chapter:"Chemical Kinetics",
+q:"Increasing temperature generally:",
+options:[
+"Decreases reaction rate always",
+"Increases reaction rate",
+"Stops all reactions",
+"Has no effect on reaction rate"
+],
+answer:1,
+explanation:
+"Increasing temperature generally increases the fraction of molecules having energy equal to or greater than activation energy."
+},
+
+{
+chapter:"Biomolecules",
+q:"Proteins are polymers mainly made from:",
+options:[
+"Fatty acids",
+"Amino acids",
+"Glucose only",
+"Nucleotides only"
+],
+answer:1,
+explanation:
+"Proteins are polymers made from amino acid units."
+}
+
+];
+
+
+let currentQuestions=[];
+let currentIndex=0;
+let score=0;
+let answered=false;
+let timeLeft=600;
+let timerInterval;
+
+
+function showPage(page){
+
+document.querySelectorAll("main > section")
+.forEach(section=>{
+section.classList.add("hidden");
+});
+
+const selected=document.getElementById(page);
+
+if(selected){
+selected.classList.remove("hidden");
+}
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+function toggleDark(){
+
+document.body.classList.toggle("dark");
+
+const enabled=
+document.body.classList.contains("dark");
+
+localStorage.setItem(
+"chemquestDark",
+enabled
+);
+
+document.getElementById("themeBtn")
+.textContent=
+enabled ? "☀️" : "🌙";
+
+}
+
+
+if(localStorage.getItem("chemquestDark")==="true"){
+
+document.body.classList.add("dark");
+
+document.getElementById("themeBtn")
+.textContent="☀️";
+
+}
+
+
+function startTest(){
+
+currentQuestions=
+[...questions]
+.sort(()=>Math.random()-0.5);
+
+currentIndex=0;
+score=0;
+answered=false;
+timeLeft=600;
+
+clearInterval(timerInterval);
+
+showPage("quiz");
+
+startTimer();
+
+displayQuestion();
+
+}
+
+
+function startChapter(chapter){
+
+const filtered=
+questions.filter(q=>
+q.chapter.toLowerCase()
+.includes(chapter.toLowerCase())
+);
+
+if(filtered.length===0){
+
+alert(
+"More questions for this chapter will be added soon."
+);
+
+return;
+
+}
+
+currentQuestions=
+[...filtered]
+.sort(()=>Math.random()-0.5);
+
+currentIndex=0;
+score=0;
+answered=false;
+timeLeft=600;
+
+clearInterval(timerInterval);
+
+showPage("quiz");
+
+startTimer();
+
+displayQuestion();
+
+}
+
+
+function displayQuestion(){
+
+answered=false;
+
+const q=
+currentQuestions[currentIndex];
+
+document.getElementById("questionNo")
+.textContent=
+"Question "+
+(currentIndex+1)+
+" / "+
+currentQuestions.length;
+
+document.getElementById("questionText")
+.textContent=q.q;
+
+const optionsBox=
+document.getElementById("options");
+
+optionsBox.innerHTML="";
+
+document.getElementById("explanation")
+.classList.add("hidden");
+
+q.options.forEach((option,index)=>{
+
+const button=
+document.createElement("button");
+
+button.className="option";
+
+button.textContent=
+String.fromCharCode(65+index)+
+". "+
+option;
+
+button.onclick=
+()=>selectAnswer(index,button);
+
+optionsBox.appendChild(button);
+
+});
+
+
+const progress=
+(currentIndex/currentQuestions.length)*100;
+
+document.getElementById("progressBar")
+.style.width=
+progress+"%";
+
+document.getElementById("nextBtn")
+.textContent=
+currentIndex===
+currentQuestions.length-1
+?
+"Finish Test ✓"
+:
+"Next Question →";
+
+}
+
+
+function selectAnswer(index,button){
+
+if(answered)return;
+
+answered=true;
+
+const q=
+currentQuestions[currentIndex];
+
+const buttons=
+document.querySelectorAll(".option");
+
+buttons.forEach((btn,i)=>{
+
+btn.disabled=true;
+
+if(i===q.answer){
+btn.classList.add("correct");
+}
+
+});
+
+
+if(index===q.answer){
+
+score++;
+
+}else{
+
+button.classList.add("wrong");
+
+}
+
+
+const explanation=
+document.getElementById("explanation");
+
+explanation.innerHTML=
+"<strong>💡 Explanation:</strong><br>"+
+q.explanation;
+
+explanation.classList.remove("hidden");
+
+}
+
+
+function nextQuestion(){
+
+if(!answered){
+
+alert("Please select an answer first.");
+
+return;
+
+}
+
+currentIndex++;
+
+if(currentIndex>=currentQuestions.length){
+
+finishTest();
+
+return;
+
+}
+
+displayQuestion();
+
+}
+
+
+function startTimer(){
+
+updateTimer();
+
+timerInterval=
+setInterval(()=>{
+
+timeLeft--;
+
+updateTimer();
+
+if(timeLeft<=0){
+
+clearInterval(timerInterval);
+
+finishTest();
+
+}
+
+},1000);
+
+}
+
+
+function updateTimer(){
+
+const minutes=
+Math.floor(timeLeft/60);
+
+const seconds=
+timeLeft%60;
+
+document.getElementById("timer")
+.textContent=
+"⏱️ "+
+String(minutes).padStart(2,"0")+
+":"+
+String(seconds).padStart(2,"0");
+
+}
+
+
+function finishTest(){
+
+clearInterval(timerInterval);
+
+showPage("result");
+
+const total=
+currentQuestions.length;
+
+const wrong=
+total-score;
+
+const percentage=
+Math.round(
+(score/total)*100
+);
+
+document.getElementById("finalScore")
+.textContent=
+score+" / "+total;
+
+document.getElementById("correctCount")
+.textContent=score;
+
+document.getElementById("wrongCount")
+.textContent=wrong;
+
+document.getElementById("percentage")
+.textContent=
+percentage+"%";
+
+let message;
+
+if(percentage>=90){
+
+message=
+"🏆 Excellent! Your Chemistry preparation is looking strong.";
+
+}
+else if(percentage>=75){
+
+message=
+"🔥 Great work! Keep practicing to reach an even higher score.";
+
+}
+else if(percentage>=50){
+
+message=
+"👍 Good attempt! Revise the weaker topics and try again.";
+
+}
+else{
+
+message=
+"📚 Keep practicing. Every test is a chance to improve.";
+
+}
+
+document.getElementById("resultMessage")
+.textContent=message;
+
+}
+
+
+function searchChapters(){
+
+const value=
+document.getElementById("chapterSearch")
+.value
+.toLowerCase();
+
+document.querySelectorAll(".chapter-card")
+.forEach(card=>{
+
+const text=
+card.dataset.search;
+
+card.style.display=
+text.includes(value)
+?
+"block"
+:
+"none";
+
+});
+
+}
+
+
+function filterPYQ(){
+
+const year=
+document.getElementById("pyqYear").value;
+
+const chapter=
+document.getElementById("pyqChapter").value;
+
+const search=
+document.getElementById("pyqSearch")
+.value
+.toLowerCase();
+
+
+/*
+Actual PYQ records will be inserted here
+after the Chemistry PYQ PDFs are available.
+*/
+
+}
+
+</script>
+
+</body>
+    </html>
