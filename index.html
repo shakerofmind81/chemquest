@@ -2194,7 +2194,7 @@ mainBtn.onclick = async () => {
             await updateProfile(result.user,{
                 displayName:name
             });
-
+            showPremiumWelcome(result.user);
             showMessage("Account created successfully!", false);
 
         }else{
@@ -2204,8 +2204,9 @@ mainBtn.onclick = async () => {
                 email,
                 password
             );
+            showPremiumWelcome(auth.currentUser);
 
-            showMessage("Login successful!", false);
+         showMessage("Login successful!", false);
         }
 
     }catch(error){
