@@ -1966,6 +1966,304 @@ after the Chemistry PYQ PDFs are available.
 }
 
 </script>
+<style>
+#authScreen{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    background:var(--bg);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
 
+.auth-box{
+    width:100%;
+    max-width:420px;
+    background:var(--card);
+    color:var(--text);
+    padding:30px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+}
+
+.auth-box h2{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.auth-subtitle{
+    text-align:center;
+    color:var(--muted);
+    margin-bottom:25px;
+}
+
+.auth-box input{
+    width:100%;
+    padding:13px;
+    margin-bottom:12px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--bg);
+    color:var(--text);
+    font-size:15px;
+}
+
+.auth-btn{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    background:var(--primary);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.auth-switch{
+    text-align:center;
+    margin-top:18px;
+    color:var(--muted);
+}
+
+.auth-switch button,
+.forgot-btn{
+    border:0;
+    background:none;
+    color:var(--primary);
+    cursor:pointer;
+}
+
+#authMessage{
+    text-align:center;
+    margin-top:12px;
+    font-size:14px;
+}
+</style>
+
+<script type="module">
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
+    onAuthStateChanged,
+    updateProfile,
+    signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCzgleaxxou7ZUJn8iBdBNRaPAlze5RJDo",
+    authDomain: "chemquest-8c88c.firebaseapp.com",
+    projectId: "chemquest-8c88c",
+    storageBucket: "chemquest-8c88c.firebasestorage.app",
+    messagingSenderId: "303916449230",
+    appId: "1:303916449230:web:24c574bd1078b21d337f9f"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const authScreen = document.createElement("div");
+authScreen.id = "authScreen";
+
+authScreen.innerHTML = `
+<div class="auth-box">
+
+    <h2>🧪 Welcome to ChemQuest</h2>
+    <p class="auth-subtitle" id="authTitle">
+        Sign in to continue
+    </p>
+
+    <input id="authName"
+        type="text"
+        placeholder="Your name"
+        style="display:none;">
+
+    <input id="authEmail"
+        type="email"
+        placeholder="Email address">
+
+    <input id="authPassword"
+        type="password"
+        placeholder="Password">
+
+    <button class="auth-btn" id="authMainBtn">
+        Sign In
+    </button>
+
+    <button class="forgot-btn"
+        id="forgotBtn"
+        style="display:block;margin:15px auto 0;">
+        Forgot password?
+    </button>
+
+    <div class="auth-switch">
+        <span id="switchText">Don't have an account?</span>
+        <button id="switchBtn">Create account</button>
+    </div>
+
+    <div id="authMessage"></div>
+
+</div>
+`;
+
+document.body.appendChild(authScreen);
+
+const title = document.getElementById("authTitle");
+const nameInput = document.getElementById("authName");
+const emailInput = document.getElementById("authEmail");
+const passwordInput = document.getElementById("authPassword");
+const mainBtn = document.getElementById("authMainBtn");
+const forgotBtn = document.getElementById("forgotBtn");
+const switchBtn = document.getElementById("switchBtn");
+const switchText = document.getElementById("switchText");
+const message = document.getElementById("authMessage");
+
+let signupMode = false;
+
+function showMessage(text, error = true){
+    message.textContent = text;
+    message.style.color = error ? "var(--danger)" : "var(--success)";
+}
+
+switchBtn.onclick = () => {
+
+    signupMode = !signupMode;
+
+    nameInput.style.display = signupMode ? "block" : "none";
+
+    title.textContent =
+        signupMode ? "Create your ChemQuest account" : "Sign in to continue";
+
+    mainBtn.textContent =
+        signupMode ? "Create Account" : "Sign In";
+
+    forgotBtn.style.display =
+        signupMode ? "none" : "block";
+
+    switchText.textContent =
+        signupMode
+        ? "Already have an account?"
+        : "Don't have an account?";
+
+    switchBtn.textContent =
+        signupMode
+        ? "Sign in"
+        : "Create account";
+
+    showMessage("", false);
+};
+
+mainBtn.onclick = async () => {
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if(!email || !password){
+        showMessage("Please enter your email and password.");
+        return;
+    }
+
+    try{
+
+        mainBtn.disabled = true;
+
+        if(signupMode){
+
+            const name = nameInput.value.trim();
+
+            if(!name){
+                showMessage("Please enter your name.");
+                mainBtn.disabled = false;
+                return;
+            }
+
+            const result =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+            await updateProfile(result.user,{
+                displayName:name
+            });
+
+            showMessage("Account created successfully!", false);
+
+        }else{
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+            showMessage("Login successful!", false);
+        }
+
+    }catch(error){
+
+        if(error.code === "auth/email-already-in-use"){
+            showMessage("This email is already registered.");
+        }
+        else if(error.code === "auth/invalid-email"){
+            showMessage("Please enter a valid email.");
+        }
+        else if(error.code === "auth/weak-password"){
+            showMessage("Password must be at least 6 characters.");
+        }
+        else if(error.code === "auth/invalid-credential"){
+            showMessage("Incorrect email or password.");
+        }
+        else{
+            showMessage("Something went wrong. Please try again.");
+        }
+
+    }finally{
+        mainBtn.disabled = false;
+    }
+};
+
+forgotBtn.onclick = async () => {
+
+    const email = emailInput.value.trim();
+
+    if(!email){
+        showMessage("Enter your email first.");
+        return;
+    }
+
+    try{
+
+        await sendPasswordResetEmail(auth,email);
+
+        showMessage(
+            "Password reset email sent. Check your inbox.",
+            false
+        );
+
+    }catch(error){
+
+        showMessage("Unable to send password reset email.");
+    }
+};
+
+onAuthStateChanged(auth,user => {
+
+    if(user){
+        authScreen.style.display = "none";
+    }else{
+        authScreen.style.display = "flex";
+    }
+
+});
+    </script>
 </body>
     </html>
