@@ -2254,16 +2254,76 @@ forgotBtn.onclick = async () => {
         showMessage("Unable to send password reset email.");
     }
 };
-
-onAuthStateChanged(auth,user => {
+onAuthStateChanged(auth, user => {
 
     if(user){
+
         authScreen.style.display = "none";
+
+        const welcome = document.createElement("div");
+
+        welcome.innerHTML = `
+            <div style="
+                position:fixed;
+                inset:0;
+                z-index:100000;
+                background:rgba(15,23,42,.75);
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                padding:20px;
+            ">
+                <div style="
+                    width:100%;
+                    max-width:420px;
+                    background:var(--card);
+                    color:var(--text);
+                    padding:35px 25px;
+                    border-radius:22px;
+                    text-align:center;
+                    box-shadow:var(--shadow);
+                ">
+                    <div style="font-size:48px;">🧪</div>
+
+                    <h2 style="margin:12px 0;">
+                        Welcome to ChemQuest!
+                    </h2>
+
+                    <p style="
+                        color:var(--muted);
+                        line-height:1.6;
+                    ">
+                        Welcome, ${user.displayName || "Student"}!<br>
+                        Your Chemistry practice journey starts here.
+                    </p>
+
+                    <button onclick="this.closest('div[style*=fixed]').remove()"
+                        style="
+                            margin-top:22px;
+                            padding:12px 25px;
+                            border:0;
+                            border-radius:10px;
+                            background:var(--primary);
+                            color:white;
+                            font-weight:bold;
+                            font-size:15px;
+                        ">
+                        Continue 🚀
+                    </button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(welcome);
+
     }else{
+
         authScreen.style.display = "flex";
+
     }
 
 });
+
     </script>
 </body>
     </html>
