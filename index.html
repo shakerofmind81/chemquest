@@ -571,7 +571,10 @@ footer{
 <button class="nav-btn" onclick="showPage('pyq')">
 🎯 PYQ
 </button>
-
+<button class="nav-btn"
+onclick="document.getElementById('notes-section').scrollIntoView({behavior:'smooth'})">
+📚 Notes
+</button>
 <button class="nav-btn" onclick="showPage('about')">
 ℹ️ About
 </button>
@@ -950,7 +953,7 @@ Practice
 <h3>03. Chemical Kinetics</h3>
 <p>Rate law, order and half-life.</p>
 <button onclick="startChapter('Chemical Kinetics')">Practice</button>
-</div>
+</diPYQ
 
 <div class="card">
 <h3>04. d- and f-Block</h3>
@@ -2327,7 +2330,7 @@ onAuthStateChanged(auth, user => {
 
     </script>
 <!-- CHEMQUEST HANDWRITTEN NOTES -->
-<section style="
+<section id="notes-section" style="
     padding:25px 15px;
     margin:25px 10px;
     background:#eef2ff;
